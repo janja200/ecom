@@ -225,6 +225,16 @@ model OrderItem {
   @@index([productId])
 }
 
+model Sales {
+  id           String   @id @default(auto()) @map("_id") @db.ObjectId
+  itemName     String
+  buyingPrice  Float?
+  sellingPrice Float
+  createdAt    DateTime @default(now())
+  profit       Float    @default(0.0)
+  updatedAt    DateTime @updatedAt
+}
+
 model Size {
   id        String    @id @default(auto()) @map("_id") @db.ObjectId
   storeId   String    @db.ObjectId // Foreign Key to Store
@@ -321,4 +331,5 @@ model TwoFactorConfirmation {
   user User @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   @@unique([userId])
+  
 }
